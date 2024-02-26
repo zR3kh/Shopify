@@ -1,17 +1,14 @@
-const { getAllProductsFromDB, getProductFromDB } = require('../model/ProductService');
+const { getAllProductsFromDB, createProductOnDB } = require('../model/ProductService');
+const asyncWrapper = require('../middleware/async');
 
-const getAllProducts = async (req, res) => {
-  try {
-    const allProducts = await getAllProductsFromDB();
-    res.status(200).json({allProducts});
-  } catch(e) {
-    console.log(e)
-  }
+const getAllProducts = asyncWrapper(async (req, res) => {
+  const allProducts = await getAllProductsFromDB();
+  res.status(200).json({allProducts});
+})
 
-}
-const getProduct = (req, res) => {
-  const product = getProductFromDB(req.body);
+const createProduct = asyncWrapper(async (req, res) => {
+  const product = await createProductOnDB(req.body);
   res.status(200).json({product});
-}
+})
 
-module.exports = { getAllProducts, getProduct }
+module.exports = { getAllProducts, createProduct }

@@ -5,7 +5,8 @@ const ProductSchema = new mongoose.Schema({
     type: String
   },
   isBought: {
-    type: Boolean
+    type: Boolean,
+    default: false
   }
 })
 const Product = mongoose.model('Product', ProductSchema);

@@ -1,17 +1,11 @@
 const Product = require('./Product')
 
-const getAllProductsFromDB = async () => {
-  try {
-    const allProducts = await Product.find({});
-    console.log(allProducts)
-    return allProducts;
-  } catch(e) {
-    console.log(e)
-  }
-}
-const getProductFromDB = async (productId) => {
-  const product = await Product.findOne({_id: productId});
-  return product;
+const getAllProductsFromDB = () => {
+  return Product.find({});
 }
 
-module.exports = { getAllProductsFromDB, getProductFromDB };
+const createProductOnDB = (data) => {
+  return Product.create(data);
+}
+
+module.exports = { getAllProductsFromDB, createProductOnDB };
