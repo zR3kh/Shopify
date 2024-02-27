@@ -5,17 +5,15 @@ const app = express();
 const productRoute = require('./routes/ProductRoute');
 const notFound = require('./middleware/404');
 const asyncWrapper = require('./middleware/async');
+const invalidId = require('./middleware/errors');
 
 /**
  * Middlewares
  */
 app.use(express.json());
-
-/**
- * Routes
- */
 app.use('/', productRoute);
 app.use(notFound);
+app.use(invalidId);
 
 /**
  * Launch server & bdd
